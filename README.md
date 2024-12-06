@@ -16,9 +16,9 @@ Chrome browser in window mode can run no problem with previously set cookies(man
 Safari browser is not checked due to system difference (Windows) and not support for older version of browser (tested).
 Test is running in headless mode on Firefox with no problems.
 
-I tried to login thru Google(commented selectors and methods), but Google has also protection for automation. I even tried recreating human lag, but it also didn't work.
+I tried to login through Google(commented selectors and methods), but Google has also protection for automation. I even tried recreating human lag, but it also didn't work.
 
-# Before running test you should replace mailPlaceholder on your email and passwordPlaceholder on your Password in test.spec.js file UC-1.
+## Before running test you should replace mailPlaceholder on your email and passwordPlaceholder on your Password in test.spec.js file UC-1.
 
 # Clone the repository
 git clone git@github.com:Shameless25/Trello.git
