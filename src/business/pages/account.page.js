@@ -27,7 +27,9 @@ class AccountPage {
     }
 
     async isAlertVisable(){
-        return await $(`span[data-testid="CheckCircleIcon"]`);
+        const alertEl = await $(`span[data-testid="CheckCircleIcon"]`);
+        await alertEl.waitForDisplayed({ timeout: 5000 });
+        return await alertEl.isDisplayed();
     }
 
     async isBoardVisible(boardName) {
