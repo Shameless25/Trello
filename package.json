@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio run src/configs/wdio.conf.js",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "test:api":"newman run postman/TrelloApiBoard.collection.json --environment postman/TrelloApiBoard.environment.json"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +18,5 @@
     "@wdio/mocha-framework": "^9.2.8",
     "@wdio/spec-reporter": "^9.2.14",
     "wdio-wait-for": "^3.0.11"
-  },
-  "dependencies": {
-    "chai": "^5.1.2"
   }
 }
