@@ -1,24 +1,42 @@
-const LoginComponents = require ('../components/login.components.js');
-
 class LoginPage {
     constructor(){
-        this.loginComponents = new LoginComponents();
+        this.selectors = {
+            goToBoardsButton:'a=Go to your boards',
+            loginMain:'a.=Log in',
+            username:'input[data-testid="username"]',
+            password:'input[data-testid="password"]',
+            loginButton:'button#login-submit',
+            memberAvatar:'button[data-testid="header-notifications-button"]'
+           };
     }
     
-    async login(username, password) {
-        await this.loginComponents.item('loginMain').click();
-        await this.loginComponents.item('username').setValue(username);
-        await this.loginComponents.item('loginbutton').click()
-        // await this.loginComponents.item('loginGoogle').click();
-        // await this.loginComponents.item('inputAdressGoogle').setValue(username);
-        // await this.loginComponents.item('confirmLog').click();
-        // await this.loginComponents.item('inputPswrdGoogle').setValue(password);
-        await this.loginComponents.item('password').setValue(password);
-        // await browser.pause(5000);
-        await this.loginComponents.item('loginbutton').click();
+    async setUsername(mail){
+        await $(this.selectors.username).setValue(mail);
     }
-    async browserURL(){
-        return await this.loginComponents.item('memberAvatar');
+    
+    async setPassword(password) {
+        await $(this.selectors.password).setValue(password);
+    }
+
+    async clickLoginMain() {
+        await $(this.selectors.loginMain).click();
+    }
+
+    async clickLoginButton() {
+        await $(this.selectors.loginButton).click();
+    }
+
+    async clickGoToBoards() {
+        await $(this.selectors.goToBoardsButton).click();
+    }
+
+    async isLoggedIn() {
+        const itemToExist = await $(this.selectors.memberAvatar);
+        await itemToExist.waitForExist({timeout:10000});
+    }
+
+    async getCurrentURL() {
+        return await browser.getUrl();
     }
 }
 

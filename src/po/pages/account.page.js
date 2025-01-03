@@ -1,52 +1,88 @@
-const AccountComponents = require ('../components/account.components.js');
-
 class AccountPage {
-    constructor(){
-        this.accountComponents = new AccountComponents()
-    }
-    async goToProfile() {
-        await this.accountComponents.item('gotoprofilebutton').click();
-    }
-
-    async createBoard(boardName) {
-        await this.accountComponents.item('createButton').click();
-        await this.accountComponents.item('createTableButton').click();
-        await this.accountComponents.item('setTableName').setValue(boardName);
-        await this.accountComponents.item('confirmTableButton').click();
-    }
-
-    async changeProfileName(newUserName){
-        await this.accountComponents.item('profileIcon').click();
-        await this.accountComponents.item('profSettings').click();
-        await this.accountComponents.item('username').setValue(newUserName);
-        await this.accountComponents.item('aboutSaveBtn').click();
-    }
-
-    async searchBoard(boardName) {
-        await this.accountComponents.item('searchBar').setValue(boardName);
-    }
-
-    async isAlertVisable(){
-        return await $(`span[data-testid="CheckCircleIcon"]`);
+    constructor() {
+        this.selectors = {
+        setTableName:'input[data-testid="create-board-title-input"]',
+        profileIcon:'div[data-testid="header-member-menu-avatar"]',
+        profileSettings:'a[data-testid="account-menu-profile"]',
+        newUsername:'input#username',
+        aboutSaveButton:'button.JhBc38JIAKzHAt',
+        createButton:'button[data-testid="header-create-menu-button"]',
+        createTableButton:'button[data-testid="header-create-board-button"]',
+        confirmTableButton:'button[data-testid="create-board-submit-button"]',
+        searchBar:'input',
+        settings:'a[data-testid="home-team-settings-tab"]',
+        editWorkspaceName:'span[data-testid="EditIcon"]',
+        newWorkspaceName:'input#displayName',
+        saveButton:'button[type="submit"]',
+        workspaceName:'h2.SiP6d2d_8FAAkC',
+        alert:'span[data-testid="CheckCircleIcon"]'
+        }
+     }
+    
+    async clickCreateBoard(){
+        await $(this.selectors.createButton).click();
     }
 
-    async isBoardVisible(boardName) {
-        return await $(`//*[text()='${boardName}']`);
+    async openCreationBorad(){
+        await $(this.selectors.createTableButton).click();
+    }
+    
+    async setBoardName(boardName){
+        await $(this.selectors.setTableName).setValue(boardName);
     }
 
-    async openBoard(newBoardName) {
-        await $(`//*[text()='${newBoardName}']`).click()
+    async confirmBoardButton(){
+        await $(this.selectors.confirmTableButton).click();
     }
 
-    async editWorkspaceName(newName) {
-        await this.accountComponents.item('settings').click();
-        await this.accountComponents.item('editWorkspaceName').click();
-        await this.accountComponents.item('newWsName').setValue(newName);
-        await this.accountComponents.item('saveButton').click();
+    async clickProflieIcon(){
+        await $(this.selectors.profileIcon).click();
+    }
+
+    async clickProfileSettings(){
+        await $(this.selectors.profileSettings).click();
+    }
+
+    async setUsername(newUserName){
+        await $(this.selectors.newUsername).setValue(newUserName);
+    }
+
+    async clickAboutSaveButton(){
+        await $(this.selectors.aboutSaveButton).click();
+    }
+
+    async setBoardName(boardName){
+        await $(this.selectors.searchBar).setValue(boardName);
+    }
+
+    async waitForDisplayed(selector, timeout = 5000) {
+        const element = await $(selector);
+        await element.waitForDisplayed({ timeout });
+        return element.isDisplayed();
+    } 
+
+    async isDisplayed(selector){
+        return await $(selector).isDisplayed();
+    }
+    
+    async openSettings(){
+        await $(this.selectors.settings).click();
+    }
+
+    async openEditWorkspace(){
+        await $(this.selectors.editWorkspaceName).click();
+    }
+
+    async setNewWrokspaceName(newName){
+        await $(this.selectors.newWorkspaceName).setValue(newName);
+    }
+
+    async clickSaveButton(){
+        await $(this.selectors.saveButton).click();
     }
 
     async getWorkspaceName() {
-        return this.accountComponents.item('workSpaceName').getText();
+        return await $(this.selectors.workspaceName).getText();
     }
 }
 
