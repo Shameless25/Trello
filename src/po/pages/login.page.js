@@ -5,16 +5,14 @@ class LoginPage {
         this.loginComponents = new LoginComponents();
     }
     
-    async login(username, password) {
+    async goToLoginPage(){
         await this.loginComponents.item('loginMain').click();
+    }
+
+    async login(username, password) {
         await this.loginComponents.item('username').setValue(username);
         await this.loginComponents.item('loginbutton').click()
-        // await this.loginComponents.item('loginGoogle').click();
-        // await this.loginComponents.item('inputAdressGoogle').setValue(username);
-        // await this.loginComponents.item('confirmLog').click();
-        // await this.loginComponents.item('inputPswrdGoogle').setValue(password);
         await this.loginComponents.item('password').setValue(password);
-        // await browser.pause(5000);
         await this.loginComponents.item('loginbutton').click();
     }
     async browserURL(){
