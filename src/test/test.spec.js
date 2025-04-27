@@ -1,6 +1,6 @@
-const LoginPage = require ('./../po/pages/login.page.js');
-const AccountPage = require ('./../po/pages/account.page.js');
-const TablePage = require ('./../po/pages/table.page.js');
+const LoginPage = require ('../business/pages/login.page.js');
+const AccountPage = require ('../business/pages/account.page.js');
+const TablePage = require ('../business/pages/table.page.js');
 const chai = require('chai');
 const { assert } = chai;
 const { expect } = chai;
@@ -13,18 +13,14 @@ describe('Trello site gnereal test', () => {
 
     it('UC-1: User can log in to Trello', async () => {
         await loginPage.login('mailPlaceholder', 'passwordPlaceholder');
-        const holder = await loginPage.browserURL();
-        await holder.waitForExist({ timeout: 10000 });
-        const currentURL = await browser.getUrl();
+        const currentURL = await loginPage.browserURL();
         assert.include(currentURL, 'boards', 'You have been logged in');
     });
 
     it('UC-2: User edits their user profile', async () => {
         await accountPage.goToProfile();
         await accountPage.changeProfileName('new_user13');
-        const alertEl = await accountPage.isAlertVisable();
-        await alertEl.waitForDisplayed({ timeout: 5000 });
-        const isDisplayed = await alertEl.isDisplayed();
+        const isDisplayed = await accountPage.isAlertVisable();
         expect(isDisplayed).to.be.true;
     });
 

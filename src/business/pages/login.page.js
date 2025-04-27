@@ -18,7 +18,9 @@ class LoginPage {
         await this.loginComponents.item('loginbutton').click();
     }
     async browserURL(){
-        return await this.loginComponents.item('memberAvatar');
+        const avatarConfirm = await this.loginComponents.item('memberAvatar');
+        await avatarConfirm.waitForExist({ timeout: 10000 });
+        return await browser.getUrl();
     }
 }
 
